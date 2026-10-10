@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Delhi Metro Navigator</title>
+<style>
+:root{--bg:#F2F4F7;--card:#fff;--ink:#14213D;--mute:#5B6678;--bd:#D5DAE3;--acc:#14213D;--onacc:#fff;--warn:#FFF1CC;--warnt:#6B4A00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1424;--card:#18213A;--ink:#EAF0FF;--mute:#9AA6C0;--bd:#2B3656;--acc:#F2B705;--onacc:#14213D;--warn:#3A2F0A;--warnt:#FFD66B}}
+:root[data-theme="dark"]{--bg:#0E1424;--card:#18213A;--ink:#EAF0FF;--mute:#9AA6C0;--bd:#2B3656;--acc:#F2B705;--onacc:#14213D;--warn:#3A2F0A;--warnt:#FFD66B}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:520px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+h1{font-size:22px;margin:0;letter-spacing:-.3px}
+.sub{color:var(--mute);font-size:13px;margin:2px 0 0}
+.badge{font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--bd);background:var(--card);white-space:nowrap}
+.badge.off{background:var(--warn);color:var(--warnt);border-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+.ic{min-width:44px;height:44px;border-radius:12px;border:1px solid var(--bd);background:var(--card)}
+.plan{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:14px}
+.row{display:flex;gap:10px;align-items:center}
+.fields{flex:1;display:flex;flex-direction:column;gap:10px}
+.fw{position:relative}
+.fw label{position:absolute;left:12px;top:6px;font-size:11px;color:var(--mute)}
+input{width:100%;height:56px;padding:22px 12px 6px;border:1px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px}
+input:focus,button:focus-visible{outline:3px solid var(--acc);outline-offset:1px}
+.sg{position:absolute;z-index:5;left:0;right:0;top:58px;background:var(--card);border:1px solid var(--bd);border-radius:12px;max-height:220px;overflow:auto;box-shadow:0 8px 24px #0003}
+.sg button{display:flex;width:100%;gap:6px;align-items:center;text-align:left;padding:12px;border:0;background:none;border-bottom:1px solid var(--bd)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.seg{display:flex;margin:12px 0 0;border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.seg button{flex:1;padding:11px;border:0;background:none}
+.seg .on{background:var(--acc);color:var(--onacc);font-weight:600}
+.go{width:100%;margin-top:12px;height:50px;border:0;border-radius:12px;background:var(--acc);color:var(--onacc);font-weight:700;font-size:17px}
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 8px;text-align:center}
+.sum div{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 4px}
+.sum b{display:block;font-size:20px}.sum span{font-size:12px;color:var(--mute)}
+.note{background:var(--warn);color:var(--warnt);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px}
+.leg{display:flex;gap:12px}
+.rail{width:14px;display:flex;flex-direction:column;align-items:center}
+.rail i{width:14px;height:14px;border-radius:50%;border:4px solid;background:var(--card);flex:none}
+.rail u{flex:1;width:8px;min-height:60px;border-radius:4px}
+.lc{padding-bottom:16px;flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font-size:13px;font-weight:700;color:#fff}
+.chip.dk{color:#1b1b1b}
+.st{font-weight:700;margin-top:2px}
+.xfer{margin:-6px 0 10px 26px;font-size:14px;color:var(--mute);border-left:2px dashed var(--bd);padding-left:12px}
+.mut{color:var(--mute);font-size:14px}
+.acts{display:flex;gap:8px;margin:12px 0}
+.acts button{flex:1;height:44px;border-radius:12px;border:1px solid var(--bd);background:var(--card)}
+.rec{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.rec button{padding:8px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--card);font-size:14px}
+footer{margin:22px 0 8px;font-size:12px;color:var(--mute)}
+h2{font-size:15px;margin:18px 0 6px}
+.cl{margin-left:auto;background:#C62828;color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px}
+textarea{width:100%;margin-top:10px;padding:10px;border:1px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--ink);font:13px/1.4 ui-monospace,monospace}
+summary{cursor:pointer;font-weight:600;min-height:28px}details input{margin-top:10px;padding-top:6px}details .fw input{padding-top:22px}
+.rec button:disabled{opacity:.7}
+</style></head><body><main>
+<header><div><h1>Delhi Metro Navigator</h1><p class="sub">Works offline. Data updated <span id="upd">10 Oct 2026</span></p></div>
+<div style="display:flex;gap:8px;align-items:center"><span id="net" class="badge">Online</span><button class="ic" id="th" aria-label="Toggle dark mode">◐</button></div></header>
+<section class="plan">
+<div class="row"><div class="fields">
+<div class="fw"><label for="a">From</label><input id="a" autocomplete="off" placeholder="Station or landmark"><div class="sg" id="sa" hidden></div></div>
+<div class="fw"><label for="b">To</label><input id="b" autocomplete="off" placeholder="Station or landmark"><div class="sg" id="sb" hidden></div></div>
+</div><button class="ic" id="sw" aria-label="Swap From and To">⇅</button></div>
+<div class="seg" id="mode"><button class="on" data-m="fast">Fastest</button><button data-m="chg">Fewest changes</button></div>
+<button class="go" id="go">Find route</button>
+</section>
+<details class="plan" style="margin-top:12px"><summary>Today's closed stations <b id="cc"></b></summary>
+<div class="fw" style="margin-top:10px"><label for="cs">Mark a station closed</label><input id="cs" autocomplete="off" placeholder="Station name"><div class="sg" id="scs" hidden></div></div>
+<button class="go" id="addc" style="height:44px;font-size:15px">Close this station</button>
+<div class="rec" id="clist"></div><p class="mut" id="um"></p>
+<p class="mut">Closed means entry and exit are shut. You can still change trains there unless the notice says interchange is closed too (today: New Delhi). Closures with start and end times switch on and off by themselves. Source: DMRC notice, 9 Oct 2026, 10:49 pm. Check DMRC on X for later changes.</p>
+<textarea id="imp" rows="4" placeholder="Paste update JSON here"></textarea>
+<p class="mut">Format: <code style="font-size:12px;word-break:break-all">{"updated":"2026-10-12","closures":[{"station":"Rajiv Chowk","from":"2026-10-12","until":"2026-10-14","note":"Maintenance"}]}</code></p>
+<div class="acts"><button id="apl">Apply update</button><button id="cpj">Copy data</button></div>
+<input id="url" placeholder="Auto-update link (JSON), for hosted copies"><div class="mut" id="ust" style="margin-top:6px"></div>
+</details>
+<div id="out"></div>
+<div id="recw"></div>
+<footer>Data may be outdated. Timings and fares are estimates. Check the official DMRC app or website for current information. Included lines: Yellow, Blue, Red, Green, Violet, Pink, Magenta, Grey, Aqua, Airport Express and Rapid Metro. Newest extensions may be missing.</footer>
+</main>
+<script>
+/* ===== FARES (editable). Stops are converted to km using KM_PER_STOP. VERIFY against DMRC ===== */
+const KM_PER_STOP=1.2;
+const FARE_WEEKDAY=[[2,11],[5,21],[12,32],[21,43],[32,54],[999,64]]; // [max km, Rs] VERIFY
+const FARE_SUNDAY=[[2,11],[5,11],[12,22],[21,32],[32,43],[999,54]]; // VERIFY
+const MIN_PER_STOP=2.1, WAIT_MIN=4; // minutes
+/* ===== LINES: stations in order ===== */
+const LINES=[
+{id:'Y',n:'Yellow Line',c:'#F2B705',dk:1,s:'Samaypur Badli,Rohini Sector 18,Haiderpur Badli Mor,Jahangirpuri,Adarsh Nagar,Azadpur,Model Town,GTB Nagar,Vishwavidyalaya,Vidhan Sabha,Civil Lines,Kashmere Gate,Chandni Chowk,Chawri Bazar,New Delhi,Rajiv Chowk,Patel Chowk,Central Secretariat,Udyog Bhawan,Lok Kalyan Marg,Jor Bagh,INA,AIIMS,Green Park,Hauz Khas,Malviya Nagar,Saket,Qutab Minar,Chhatarpur,Sultanpur,Ghitorni,Arjan Garh,Guru Dronacharya,Sikanderpur,MG Road,IFFCO Chowk,HUDA City Centre'},
+{id:'B',n:'Blue Line',c:'#1C6FD1',s:'Dwarka Sector 21,Dwarka Sector 8,Dwarka Sector 9,Dwarka Sector 10,Dwarka Sector 11,Dwarka Sector 12,Dwarka Sector 13,Dwarka Sector 14,Dwarka,Dwarka Mor,Nawada,Uttam Nagar West,Uttam Nagar East,Janakpuri West,Janakpuri East,Tilak Nagar,Subhash Nagar,Tagore Garden,Rajouri Garden,Ramesh Nagar,Moti Nagar,Kirti Nagar,Shadipur,Patel Nagar,Rajendra Place,Karol Bagh,Jhandewalan,RK Ashram Marg,Rajiv Chowk,Barakhamba Road,Mandi House,Supreme Court,Indraprastha,Yamuna Bank,Akshardham,Mayur Vihar-I,Mayur Vihar Extension,New Ashok Nagar,Noida Sector 15,Noida Sector 16,Noida Sector 18,Botanical Garden,Golf Course,Noida City Centre,Noida Sector 34,Noida Sector 52,Noida Sector 61,Noida Sector 59,Noida Sector 62,Noida Electronic City'},
+{id:'V',n:'Blue Line (Vaishali)',c:'#1C6FD1',s:'Yamuna Bank,Laxmi Nagar,Nirman Vihar,Preet Vihar,Karkarduma,Anand Vihar ISBT,Kaushambi,Vaishali'},
+{id:'R',n:'Red Line',c:'#D62828',s:'Shaheed Sthal,Hindon River,Arthala,Mohan Nagar,Shyam Park,Major Mohit Sharma,Raj Bagh,Shaheed Nagar,Dilshad Garden,Jhil Mil,Mansarovar Park,Shahdara,Welcome,Seelampur,Shastri Park,Kashmere Gate,Tis Hazari,Pul Bangash,Pratap Nagar,Shastri Nagar,Inderlok,Kanhaiya Nagar,Keshav Puram,Netaji Subhash Place,Kohat Enclave,Pitampura,Rohini East,Rohini West,Rithala'},
+{id:'P',n:'Violet Line',c:'#7B3FA0',s:'Kashmere Gate,Lal Qila,Jama Masjid,Delhi Gate,ITO,Mandi House,Janpath,Central Secretariat,Khan Market,JLN Stadium,Jangpura,Lajpat Nagar,Moolchand,Kailash Colony,Nehru Place,Kalkaji Mandir,Govind Puri,Okhla,Jasola,Sarita Vihar,Mohan Estate,Tughlakabad,Badarpur Border,Sarai,NHPC Chowk,Mewala Maharajpur,Sector 28 Faridabad,Badkhal Mor,Old Faridabad,Neelam Chowk Ajronda,Bata Chowk,Escorts Mujesar,Sant Surdas,Raja Nahar Singh'},
+{id:'A',n:'Airport Express',c:'#E8742A',dk:0,s:'New Delhi,Shivaji Stadium,Dhaula Kuan,Delhi Aerocity,IGI Airport,Dwarka Sector 21'},
+{id:'G',n:'Green Line',c:'#2E9E4F',s:'Inderlok,Ashok Park Main,Punjabi Bagh,Shivaji Park,Madipur,Paschim Vihar East,Paschim Vihar West,Peeragarhi,Udyog Nagar,Surajmal Stadium,Nangloi,Nangloi Railway Station,Rajdhani Park,Mundka,Mundka Industrial Area,Ghevra,Tikri Kalan,Tikri Border,Pandit Shree Ram Sharma,Bahadurgarh City,Brigadier Hoshiyar Singh'},
+{id:'H',n:'Green Line (Kirti Nagar)',c:'#2E9E4F',s:'Ashok Park Main,Satguru Ram Singh Marg,Kirti Nagar'},
+{id:'K',n:'Pink Line',c:'#E8579B',s:'Majlis Park,Azadpur,Shalimar Bagh,Netaji Subhash Place,Shakurpur,Punjabi Bagh West,ESI Basaidarapur,Rajouri Garden,Mayapuri,Naraina Vihar,Delhi Cantt,Durgabai Deshmukh South Campus,Moti Bagh,Bhikaji Cama Place,Sarojini Nagar,INA,South Extension,Lajpat Nagar,Vinobapuri,Ashram,Sarai Kale Khan Nizamuddin,Mayur Vihar Pocket 1,Mayur Vihar-I,Trilokpuri Sanjay Lake,East Vinod Nagar,Mandawali West Vinod Nagar,IP Extension,Anand Vihar ISBT,Karkarduma,Karkarduma Court,Krishna Nagar,East Azad Nagar,Welcome,Jaffrabad,Maujpur Babarpur,Gokulpuri,Johri Enclave,Shiv Vihar'},
+{id:'M',n:'Magenta Line',c:'#B5179E',s:'Janakpuri West,Dabri Mor Janakpuri South,Dashrathpuri,Palam,Sadar Bazar Cantonment,Terminal 1 IGI Airport,Shankar Vihar,Vasant Vihar,Munirka,R.K. Puram,IIT Delhi,Hauz Khas,Panchsheel Park,Chirag Delhi,Greater Kailash,Nehru Enclave,Kalkaji Mandir,Okhla NSIC,Sukhdev Vihar,Jamia Millia Islamia,Okhla Vihar,Jasola Vihar Shaheen Bagh,Kalindi Kunj,Okhla Bird Sanctuary,Botanical Garden'},
+{id:'S',n:'Grey Line',c:'#7A7F87',s:'Dwarka,Nangli,Najafgarh,Dhansa Bus Stand'},
+{id:'Q',n:'Aqua Line (Noida)',c:'#12A5B5',s:'Noida Sector 52,Noida Sector 50,Noida Sector 76,Noida Sector 101,Noida Sector 81,NSEZ,Noida Sector 83,Noida Sector 137,Noida Sector 142,Noida Sector 143,Noida Sector 144,Noida Sector 145,Noida Sector 146,Noida Sector 147,Noida Sector 148,Knowledge Park II,Pari Chowk,Alpha 1,Delta 1,GNIDA Office,Depot'},
+{id:'T',n:'Rapid Metro (Gurugram)',c:'#3F51B5',s:'Sikanderpur,Phase 2,Belvedere Towers,Cyber City,Moulsari Avenue,DLF Phase 3'}
+];
+/* walking minutes between lines at interchange stations; default 4. VERIFY */
+const XWALK={'Rajiv Chowk':5,'Kashmere Gate':6,'Central Secretariat':4,'Mandi House':4,'New Delhi':6,'Dwarka Sector 21':3,'Yamuna Bank':2,'Inderlok':4,'Netaji Subhash Place':4,'Azadpur':4,'Rajouri Garden':5,'INA':6,'Lajpat Nagar':5,'Hauz Khas':5,'Welcome':5,'Mayur Vihar-I':4,'Karkarduma':4,'Janakpuri West':4,'Kalkaji Mandir':5,'Botanical Garden':5,'Kirti Nagar':4,'Ashok Park Main':3,'Dwarka':4,'Noida Sector 52':4,'Sikanderpur':6,'Anand Vihar ISBT':5}; // VERIFY
+const ALIAS={'connaught place':'Rajiv Chowk','cp':'Rajiv Chowk','igi':'IGI Airport','airport':'IGI Airport','terminal 3':'IGI Airport','old delhi':'Chandni Chowk','red fort':'Lal Qila','gurgaon':'HUDA City Centre','gurugram':'HUDA City Centre','noida':'Noida City Centre','railway station':'New Delhi','ndls':'New Delhi','isbt':'Kashmere Gate','akshardham temple':'Akshardham','lotus temple':'Kalkaji Mandir','jnu':'Munirka','qutub minar':'Qutab Minar','chandni chowk':'Chandni Chowk','aiims hospital':'AIIMS','faridabad':'Old Faridabad','ghaziabad':'Vaishali','dilli haat':'INA'};
+LINES.forEach(l=>l.st=l.s.split(','));
+const by={};LINES.forEach((l,li)=>l.st.forEach((s,i)=>{(by[s]=by[s]||[]).push([li,i])}));
+const NAMES=Object.keys(by).sort();
+ALIAS['jnu']='Munirka';
+const $=id=>document.getElementById(id);
+const norm=s=>s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+const lineDots=n=>[...new Set(by[n].map(x=>LINES[x[0]]))].map(l=>'<span class="dot" style="background:'+l.c+'"></span>').join('');
+function lev(a,b){const m=a.length,n=b.length;let p=[...Array(n+1).keys()];for(let i=1;i<=m;i++){const c=[i];for(let j=1;j<=n;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]==b[j-1]?0:1));p=c}return p[n]}
+function search(q){q=norm(q);if(!q)return[];const out=new Map();
+for(const k in ALIAS)if(k.includes(q)||q.includes(k)&&k.length>2)out.set(ALIAS[k],0);
+NAMES.forEach(n=>{const x=norm(n);let sc=null;
+if(x.startsWith(q))sc=1;else if(x.split(' ').some(w=>w.startsWith(q)))sc=2;else if(x.includes(q))sc=3;
+else if(q.length>3){const d=Math.min(lev(q,x.slice(0,q.length)),lev(q,x));if(d<=2)sc=4+d}
+if(sc!==null&&!out.has(n))out.set(n,sc)});
+return[...out].sort((a,b)=>a[1]-b[1]).slice(0,6).map(x=>x[0])}
+function bind(inp,box){inp.addEventListener('input',()=>{const r=search(inp.value);box.innerHTML='';
+r.forEach(n=>{const b=document.createElement('button');b.type='button';b.innerHTML=lineDots(n)+' '+n+(CLOSED.has(n)?' <span class="cl">Closed</span>':'');b.onclick=()=>{inp.value=n;box.hidden=true};box.appendChild(b)});
+box.hidden=!r.length});
+inp.addEventListener('blur',()=>setTimeout(()=>box.hidden=true,180))}
+bind($('a'),$('sa'));bind($('b'),$('sb'));
+function resolve(v){if(by[v])return v;const r=search(v);return r[0]||null}
+/* ===== ROUTING: Dijkstra over (line,index) nodes ===== */
+function route(from,to,mode){
+const key=(l,i)=>l+'|'+i,dist={},prev={},done={};
+const start=by[from].map(x=>key(x[0],x[1]));
+start.forEach(k=>dist[k]=0);
+const nb=k=>{const[l,i]=k.split('|').map(Number),st=LINES[l].st,o=[];
+if(i>0)o.push([key(l,i-1),MIN_PER_STOP,0]);if(i<st.length-1)o.push([key(l,i+1),MIN_PER_STOP,0]);
+by[st[i]].forEach(x=>{if(x[0]!==l&&!(USEC&&NOIX.has(st[i])))o.push([key(x[0],x[1]),(XWALK[st[i]]||4)+WAIT_MIN,mode==='chg'?40:0])});return o};
+let end=null;
+while(true){let k=null,b=1e9;for(const x in dist)if(!done[x]&&dist[x]<b){b=dist[x];k=x}
+if(k===null)break;done[k]=1;const[l,i]=k.split('|').map(Number);
+if(LINES[l].st[i]===to){end=k;break}
+nb(k).forEach(([n,t,p])=>{const d=dist[k]+t+p;if(dist[n]===undefined||d<dist[n]){dist[n]=d;prev[n]=k}})}
+if(!end)return null;
+const path=[];for(let k=end;k;k=prev[k])path.unshift(k.split('|').map(Number));
+const legs=[];path.forEach(([l,i])=>{const g=legs[legs.length-1];if(g&&g.l===l)g.to=i;else legs.push({l,from:i,to:i})});
+return legs.filter((g,n)=>g.from!==g.to||legs.length===1)}
+function fare(stops,legs){if(legs.some(g=>g.l>=0&&['A','T'].includes(LINES[g.l].id)))return null;
+const km=stops*KM_PER_STOP,t=new Date().getDay()===0?FARE_SUNDAY:FARE_WEEKDAY;return t.find(r=>km<=r[0])[1]}
+let mode='fast';
+document.querySelectorAll('#mode button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;document.querySelectorAll('#mode button').forEach(x=>x.classList.toggle('on',x===b));if($('out').innerHTML)find()});
+function find(){const out=$('out');const f=resolve($('a').value),t=resolve($('b').value);
+if(!f||!t){out.innerHTML='<div class="note">Station not found. Pick a name from the suggestions, or try a landmark like "Connaught Place".</div>';return}
+$('a').value=f;$('b').value=t;
+if(f===t){out.innerHTML='<div class="note">From and To are the same station. Choose a different destination.</div>';return}
+const bad=[f,t].filter(x=>CLOSED.has(x));
+if(bad.length){out.innerHTML=closedMsg(bad);return}
+const legs=route(f,t,mode);
+if(!legs){out.innerHTML='<div class="note">No route found in the data we have. Some lines are not included yet.</div>';return}
+let stops=0,xf=legs.length-1,mins=0;
+legs.forEach(g=>{stops+=Math.abs(g.to-g.from);mins+=Math.abs(g.to-g.from)*MIN_PER_STOP});
+legs.forEach((g,i)=>{if(i<legs.length-1)mins+=(XWALK[LINES[g.l].st[g.to]]||4)+WAIT_MIN});
+mins=Math.round(mins);const fr=fare(stops,legs);
+const now=new Date(),h=now.getHours()+now.getMinutes()/60;
+let warn='';if(h<5.5||h>=23.5)warn='Metro is likely closed right now. Services usually run from about 5:30 am to 11:30 pm.';else if(h>=22.5)warn='Last trains may be soon. Check the last train time at your station.';
+let html=warn?'<div class="note">'+warn+'</div>':'';
+USEC=false;const base=route(f,t,mode);USEC=true;
+if(CLOSED.size&&JSON.stringify(base)!==JSON.stringify(legs))html+='<div class="note">Rerouted to avoid closed stations: '+[...CLOSED.keys()].join(', ')+'.</div>';
+html+='<div class="sum"><div><b>'+mins+'</b><span>minutes</span></div><div><b>'+stops+'</b><span>stops</span></div><div><b>'+xf+'</b><span>changes</span></div><div><b>'+(fr?'₹'+fr:'–')+'</b><span>fare</span></div></div>';
+if(!fr)html+='<p class="mut">Airport Express and Rapid Metro use separate fares. Check DMRC for the exact amount.</p>';
+let share='Delhi Metro: '+f+' to '+t+' ('+mins+' min, '+stops+' stops)\n';
+legs.forEach((g,i)=>{const L=LINES[g.l],st=L.st,dirn=g.to>g.from,term=dirn?st[st.length-1]:st[0],n=Math.abs(g.to-g.from),thru=st.slice(Math.min(g.from,g.to)+1,Math.max(g.from,g.to)).filter(x=>CLOSED.has(x));
+const ch='<span class="chip'+(L.dk?' dk':'')+'" style="background:'+L.c+'">'+L.n+'</span>';
+html+='<div class="leg"><div class="rail"><i style="border-color:'+L.c+'"></i><u style="background:'+L.c+'"></u></div><div class="lc">'+ch+'<div class="st">'+st[g.from]+tg(st[g.from])+'</div><div class="mut">Towards '+term+'. Ride '+n+' stop'+(n>1?'s':'')+' (about '+Math.round(n*MIN_PER_STOP)+' min).'+''+'</div><div class="st" style="margin-top:10px">Get off at '+st[g.to]+tg(st[g.to])+'</div></div></div>';
+share+=(i+1)+'. '+L.n+' towards '+term+': '+st[g.from]+' to '+st[g.to]+' ('+n+' stops)\n';
+if(i<legs.length-1){const w=XWALK[st[g.to]]||4;html+='<div class="xfer">Change here. Follow signs to '+LINES[legs[i+1].l].n+' (about '+w+' min walk).'+(CLOSED.has(st[g.to])?' Entry and exit are closed here, but you can stay inside to change.':'')+'</div>'}});
+html+='<div class="acts"><button id="shr">Share route</button><button id="sv">Save trip</button></div>';
+out.innerHTML=html;
+$('shr').onclick=async()=>{try{if(navigator.share)await navigator.share({text:share});else{await navigator.clipboard.writeText(share);$('shr').textContent='Copied'}}catch(e){}};
+$('sv').onclick=()=>{save(f,t,true);$('sv').textContent='Saved'};
+save(f,t,false)}
+/* ===== Recent and saved trips (localStorage, safe) ===== */
+function load(){try{return JSON.parse(localStorage.getItem('dmn_trips')||'[]')}catch(e){return[]}}
+function save(f,t,pin){let a=load().filter(x=>!(x.f===f&&x.t===t&&!pin));const ex=a.find(x=>x.f===f&&x.t===t);if(ex){if(pin)ex.pin=true}else a.unshift({f,t,pin});
+a=[...a.filter(x=>x.pin),...a.filter(x=>!x.pin).slice(0,5)];try{localStorage.setItem('dmn_trips',JSON.stringify(a))}catch(e){}drawRec()}
+function drawRec(){const a=load(),w=$('recw');if(!a.length){w.innerHTML='';return}
+w.innerHTML='<h2>Recent and saved trips</h2><div class="rec"></div>';
+a.forEach(x=>{const b=document.createElement('button');b.textContent=(x.pin?'★ ':'')+x.f+' → '+x.t;b.onclick=()=>{$('a').value=x.f;$('b').value=x.t;find()};w.firstChild.nextSibling.appendChild(b)})}
+/* ===== CLOSURES and self-update ===== */
+let CLOSED=new Map(),NOIX=new Set(),USEC=true,CLOSURES=[],UNMAPPED=[]; // item: {station,from,until,note,ix} times as YYYY-MM-DDTHH:MM, ix:false = interchange also closed
+const DEFAULT_DATA={stamp:'2026-10-09T22:49',updated:'9 Oct 2026, 10:49 pm',unmapped:['Seva Teerth','Yamuna Vihar','Khajuri Khas'],closures:('Janpath,Patel Chowk,Central Secretariat,Lok Kalyan Marg,Rajiv Chowk,New Delhi,Mandi House,Barakhamba Road,ITO,Delhi Gate,Khan Market,RK Ashram Marg,Jhandewalan,Supreme Court,Indraprastha,Shivaji Stadium,INA,Hauz Khas,Jor Bagh,Lajpat Nagar,Jangpura,Ashram,Jamia Millia Islamia,Chawri Bazar,Jama Masjid,Karol Bagh,Rajendra Place,Vishwavidyalaya,Kashmere Gate,Inderlok,GTB Nagar,Netaji Subhash Place,Azadpur,Jahangirpuri,Haiderpur Badli Mor,Majlis Park,Seelampur,Maujpur Babarpur,Jaffrabad,Welcome,Shahdara,Rithala').split(',').map(s=>({station:s,from:'2026-10-09T21:00',until:'2026-10-10T18:00',ix:s!=='New Delhi',note:'Entry and exit closed until 6 pm today'}))};
+const tg=s=>CLOSED.has(s)?' <span class="cl">Closed</span>':'';
+const jget=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||'')||d}catch(e){return d}};
+const jset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function applyData(d){if(!d)return;if(Array.isArray(d.closures))CLOSURES=d.closures.filter(c=>c&&by[c.station]);UNMAPPED=d.unmapped||[];if(d.updated)$('upd').textContent=d.updated}
+function refreshClosed(){const d=new Date(),p=n=>String(n).padStart(2,'0'),t=d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes());CLOSED=new Map();NOIX=new Set();
+const fx=(s,e)=>s&&s.length===10?s+(e?'T23:59':'T00:00'):s;
+CLOSURES.forEach(c=>{if((!c.from||fx(c.from)<=t)&&(!c.until||fx(c.until,1)>=t)){CLOSED.set(c.station,c.note||'Closed');if(c.ix===false)NOIX.add(c.station)}});
+const man=jget('dmn_manual',[]);man.forEach(s=>{if(by[s])CLOSED.set(s,'Marked closed by you')});
+$('cc').textContent=CLOSED.size?'('+CLOSED.size+' closed)':'';$('um').textContent=UNMAPPED.length&&CLOSED.size?'Also closed but not on this map yet: '+UNMAPPED.join(', ')+'.':'';
+const l=$('clist');l.innerHTML='';CLOSED.forEach((n,s)=>{const b=document.createElement('button');const m=man.includes(s);b.textContent=m?s+' ✕':s;b.disabled=!m;if(m)b.onclick=()=>{jset('dmn_manual',man.filter(x=>x!==s));refreshClosed();if($('out').innerHTML)find()};l.appendChild(b)})}
+function closedMsg(bad){let h='<div class="note">'+bad.join(' and ')+(bad.length>1?' are':' is')+' closed for entry and exit.</div>';
+bad.forEach(s=>{const alts=new Set();by[s].forEach(([li,i])=>{const st=LINES[li].st;for(const d of[-1,1])for(let j=i+d;j>=0&&j<st.length;j+=d)if(!CLOSED.has(st[j])){alts.add(st[j]);break}});
+if(alts.size)h+='<p class="mut">Nearest open stations to '+s+':</p><div class="rec">'+[...alts].map(a=>'<button class="alt" data-w="'+(s===$('a').value?'a':'b')+'" data-n="'+a+'">'+a+'</button>').join('')+'</div>'});return h}
+$('out').addEventListener('click',e=>{const b=e.target.closest('.alt');if(!b)return;$(b.dataset.w).value=b.dataset.n;find()});
+bind($('cs'),$('scs'));
+$('addc').onclick=()=>{const s=resolve($('cs').value);if(!s)return;const m=jget('dmn_manual',[]);if(!m.includes(s))m.push(s);jset('dmn_manual',m);$('cs').value='';refreshClosed();if($('out').innerHTML)find()};
+$('apl').onclick=()=>{try{const d=JSON.parse($('imp').value);applyData(d);d.stamp=d.stamp||new Date().toISOString().slice(0,16);jset('dmn_data',d);refreshClosed();$('ust').textContent='Update applied.';if($('out').innerHTML)find()}catch(e){$('ust').textContent='That JSON could not be read. Check the format.'}};
+$('cpj').onclick=async()=>{const d=JSON.stringify({updated:$('upd').textContent,closures:CLOSURES},null,1);try{await navigator.clipboard.writeText(d);$('ust').textContent='Copied.'}catch(e){$('imp').value=d}};
+async function pull(){const u=jget('dmn_url','closures.json');if(!u||!navigator.onLine)return;try{const r=await fetch(u,{cache:'no-store'});const d=await r.json();applyData(d);d.stamp=d.stamp||new Date().toISOString().slice(0,16);jset('dmn_data',d);refreshClosed();$('ust').textContent='Updated from link at '+new Date().toLocaleTimeString();if($('out').innerHTML)find()}catch(e){$('ust').textContent='Could not reach the update link. Using saved data.'}}
+$('url').value=jget('dmn_url','closures.json');$('url').onchange=()=>{jset('dmn_url',$('url').value.trim());pull()};
+applyData(DEFAULT_DATA);{const sv=jget('dmn_data',null);if(sv&&(sv.stamp||'')>DEFAULT_DATA.stamp)applyData(sv)}refreshClosed();pull();
+setInterval(()=>{const k=[...CLOSED.keys()].join();refreshClosed();if([...CLOSED.keys()].join()!==k&&$('out').innerHTML)find()},60000);
+setInterval(pull,3600000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshClosed();pull()}});
+$('go').onclick=find;
+$('sw').onclick=()=>{const v=$('a').value;$('a').value=$('b').value;$('b').value=v;if($('out').innerHTML)find()};
+$('th').onclick=()=>{const r=document.documentElement,d=getComputedStyle(r).getPropertyValue('--bg').trim()==='#0E1424';r.dataset.theme=d?'light':'dark'};
+function net(){const o=navigator.onLine;$('net').textContent=o?'Online':'Offline mode';$('net').className='badge'+(o?'':' off')}
+addEventListener('online',net);addEventListener('offline',net);net();drawRec();
+</script></body></html>

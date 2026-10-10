@@ -1,0 +1,305 @@
+{
+ "stamp": "2026-10-09T22:49",
+ "updated": "9 Oct 2026, 10:49 pm",
+ "unmapped": [
+  "Seva Teerth",
+  "Yamuna Vihar",
+  "Khajuri Khas"
+ ],
+ "closures": [
+  {
+   "station": "Janpath",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Patel Chowk",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Central Secretariat",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Lok Kalyan Marg",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Rajiv Chowk",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "New Delhi",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": false,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Mandi House",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Barakhamba Road",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "ITO",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Delhi Gate",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Khan Market",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "RK Ashram Marg",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Jhandewalan",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Supreme Court",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Indraprastha",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Shivaji Stadium",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "INA",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Hauz Khas",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Jor Bagh",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Lajpat Nagar",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Jangpura",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Ashram",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Jamia Millia Islamia",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Chawri Bazar",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Jama Masjid",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Karol Bagh",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Rajendra Place",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Vishwavidyalaya",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Kashmere Gate",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Inderlok",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "GTB Nagar",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Netaji Subhash Place",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Azadpur",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Jahangirpuri",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Haiderpur Badli Mor",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Majlis Park",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Seelampur",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Maujpur Babarpur",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Jaffrabad",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Welcome",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Shahdara",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  },
+  {
+   "station": "Rithala",
+   "from": "2026-10-09T21:00",
+   "until": "2026-10-10T18:00",
+   "ix": true,
+   "note": "Entry and exit closed (security)"
+  }
+ ]
+}
